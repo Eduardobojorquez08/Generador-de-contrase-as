@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tarjeta {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            width: 380px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a1a2e;
+            font-size: 26px;
+            margin-bottom: 4px;
+        }
+
+        p,
+        h2 {
+            color: #666;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 50px;
+            border: 1.5px solid #e0e0e0;
+            background-color: #f8f9ff;
+            color: #1a1a2e;
+            font-size: 15px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border-radius: 50px;
+            border: none;
+            background-color: #4a7aff;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 8px 0;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #3a6aef;
+        }
+
+        #resultado,
+        #resultado-verificar {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        #seccion-crear {
+            display: none;
+        }
+
+        #seccion-verificar {
+            display: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+
+    <title>Generador de Contraseña</title>
+</head>
+
+<body>
+    <div class="tarjeta">
+        <h1>Generador de Contraseñas</h1>
+
+        <button onclick="mostrarCrear()">Crear Contraseña</button>
+        <button onclick="mostrarVerificar()">Verificar Contraseña</button>
+
+        <div id="seccion-crear">
+            <h2>Crear Contraseña</h2>
+            <input type="number" id="longitud" placeholder="Longitud de tu contraseña">
+            <button onclick="generarContrasena()">Generar Contraseña</button>
+            <p id="texto-resultado" style="display:none">Tu Contraseña es:</p>
+            <p id="resultado"></p>
+        </div>
+        <div id="seccion-verificar">
+            <h2>Verificar Contraseña</h2>
+            <input type="text" id="contrasena-input" placeholder="Ingresa tu contraseña">
+            <button onclick="verificarContrasena()">Verificar</button>
+            <p id="resultado-verificar"></p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarCrear() {
+            document.getElementById("seccion-crear").style.display = "block";
+            document.getElementById("seccion-verificar").style.display = "none";
+        }
+        function mostrarVerificar() {
+            document.getElementById("seccion-verificar").style.display = "block";
+            document.getElementById("seccion-crear").style.display = "none";
+        }
+        function generarContrasena() {
+            let longitud = document.getElementById("longitud").value;
+            fetch("/generar?longitud=" + longitud)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultado").innerText = data.contraseña;
+                });
+            document.getElementById("texto-resultado").style.display = "block";
+        }
+        function verificarContrasena() {
+            let contrasena = document.getElementById("contrasena-input").value;
+            fetch("/verificar?contraseña=" + contrasena)
+                .then(response => response.json())
+                .then(data => {
+                    let resultado = document.getElementById("resultado-verificar");
+                    resultado.innerText = data.verificacion;
+
+                    if (data.verificacion.includes("si es segura")) {
+                        resultado.style.backgroundColor = "#e8f5e9";
+                        resultado.style.color = "#2e7d32";
+                    } else {
+                        resultado.style.backgroundColor = "#ffebee";
+                        resultado.style.color = "#c62828";
+                    }
+                })
+        }
+    </script>
+</body>
+
+</html>
