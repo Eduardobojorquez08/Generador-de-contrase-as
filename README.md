@@ -5,8 +5,8 @@ Verifica si tu contraseña es segura y te dice qué mejorar
 
 
 Screenshots
-![Pantalla de inicio](static/inicio.png)
-![verifiacion](static/juego.png)
+![Pantalla de inicio](longitud.png)
+![verifiacion](static/verificacion.png)
 
 
 Hecho con: Python, Flask, Html, CSS, Javascript
