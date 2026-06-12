@@ -5,8 +5,8 @@ Verifica si tu contraseña es segura y te dice qué mejorar
 
 
 Screenshots
-![Pantalla de inicio](screenshots/longitud.png)
-![Jugando](screenshots/verificacion.png)
+![longitud](screenshots/longitud.png)
+![verificacion](screenshots/verificacion.png)
 
 
 
