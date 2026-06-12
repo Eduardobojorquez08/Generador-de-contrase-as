@@ -9,8 +9,8 @@ Funcionalidades
 
 Screenshots
 
-![Inicio](screenshots/inicio.png)
-![Verificador](screenshots/verificador.png)
+![Inicio](screenshots/inicio.PNG)
+![Verificador](screenshots/verificador.PNG)
 
 Tecnologías usadas
 
